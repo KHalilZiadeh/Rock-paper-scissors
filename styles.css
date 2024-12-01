@@ -1,0 +1,243 @@
+:root {
+  --dark-text: hsl(229, 25%, 31%);
+  --score-text: hsl(229, 64%, 46%);
+  --header-outline: hsl(217, 16%, 45%);
+  --gradient-start: hsl(214, 47%, 23%);
+  --gradient-end: hsl(237, 49%, 15%);
+  --scissors-gradient-start: hsl(39, 89%, 49%);
+  --scissors-gradient-end: hsl(40, 84%, 53%);
+  --paper-gradient-start: hsl(230, 89%, 62%);
+  --paper-gradient-end: hsl(230, 89%, 65%);
+  --rock-gradient-start: hsl(349, 71%, 52%);
+  --rock-gradient-end: hsl(349, 70%, 56%);
+  /* - Lizard Gradient: hsl(261, 73%, 60%) to hsl(261, 72%, 63%) */
+  /* - Spock Gradient: hsl(189, 59%, 53%) to hsl(189, 58%, 57%) */
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Barlow Semi Condensed';
+  width: 100vw;
+  height: 100vh;
+}
+
+.attribution {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  color: white;
+}
+
+.rules {
+  all: unset;
+  width: fit-content;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 2rem;
+  border: 2px solid var(--header-outline);
+  border-radius: 0.5rem;
+  align-self: flex-end;
+}
+
+#rules {
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+#rules::backdrop {
+  background-color: #0005;
+}
+
+#rules button {
+  all: unset;
+}
+
+#rules .header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  color: #ccc;
+  font-size: 2rem;
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.game-container {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 2rem;
+  padding-inline-start: 2rem;
+  padding-inline-end: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-image: radial-gradient(circle at top, var(--gradient-start), var(--gradient-end));
+}
+
+.game-container .header {
+  width: 50%;
+  height: fit-content;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  border: 2px solid var(--header-outline);
+  border-radius: 1rem;
+}
+
+.game-container .header .text {
+  color: white;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.game-container .header .score {
+  background-color: white;
+  height: 6rem;
+  width: 6rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-container .header .score .score-text {
+  color: var(--score-text);
+  font-weight: 600;
+}
+
+.game-container .header .score .score-value {
+  color: var(--dark-text);
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 4rem;
+}
+
+.game-container .game-body,
+.game-result {
+  width: 360px;
+  height: 360px;
+  margin-top: 2rem;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  position: relative;
+}
+
+.game-result {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 600px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+.items {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 160px;
+  gap: 40px;
+  place-items: center;
+}
+
+.item {
+  width: 160px;
+  height: 160px;
+  background-color: white;
+  border-radius: 50%;
+  border: 20px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-container .game-body .items .item:last-child {
+  grid-column: span 2;
+}
+
+.game-container .game-body .items .item:hover {
+  transform: translateY(-5px);
+}
+
+.lines {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+}
+
+line {
+  stroke: rgba(0, 0, 0, 0.3);
+  stroke-width: 20;
+  stroke-linecap: round;
+}
+
+.game-result>div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.game-result .item {
+  margin-top: 2rem;
+}
+
+.item.winner {
+  box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.05), 0 0 0 40px rgba(255, 255, 255, 0.04), 0 0 0 60px rgba(255, 255, 255, 0.03), 0 0 0 80px rgba(255, 255, 255, 0.02);
+}
+
+.game-result .result {
+  font-size: 2rem;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-result .result button {
+  background-color: white;
+  font-weight: 600;
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.win {
+  color: var(--score-text);
+}
+
+.lose {
+  color: var(--rock-gradient-start);
+}
+
+.draw {
+  color: var(--dark-text);
+}
