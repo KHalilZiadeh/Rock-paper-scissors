@@ -147,3 +147,7 @@ function reloadGame() {
   resultDiv.lastElementChild.firstElementChild.remove();
   resultDiv.style.display = 'none';
 }
+
+function removePopover() {
+  document.getElementById('rules').hidePopover();
+}
